@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEM=="usb", RUN+="/bin/bash /usr/bin/udev_notify.sh add    '%p' '%E{ID_MODEL_ID}' '%E{ID_VENDOR_ID}' '$env{ID_VENDOR_FROM_DATABASE} $env{ID_MODEL_FROM_DATABASE}'"
+ACTION=="remove", SUBSYSTEM=="usb", RUN+="/bin/bash /usr/bin/udev_notify.sh remove '%p' '$env{PRODUCT}' '$name' 'UNAVAILABLE'"

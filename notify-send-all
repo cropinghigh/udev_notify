@@ -1,0 +1,14 @@
+#!/bin/bash
+
+user_list=($(who | grep -E "\(:[0-9](\.[0-9])*\)" | awk '{print $1 "@" $NF}' | sort -u))
+for user in $user_list; do
+    username=${user%@*}
+    display=${user#*@}
+    homee=$(eval echo "~$username")
+    machid=$(cat /var/lib/dbus/machine-id)
+    dbus="$homee/.dbus/session-bus/$machid-${display:2:-1}"
+    dbus_addr=$(cat $dbus | grep -E '^DBUS_SESSION_BUS_ADDRESS=' | cut -d "=" -f2- | tr -d "'")
+    /usr/bin/sudo -u $username DISPLAY=${display:1:-1} \
+                      DBUS_SESSION_BUS_ADDRESS=$dbus_addr \
+                      /usr/bin/notify-send "$@"
+done
