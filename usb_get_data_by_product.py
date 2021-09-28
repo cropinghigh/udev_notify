@@ -5,8 +5,8 @@ if(len(sys.argv) < 2):
     exit(1)
 product = sys.argv[1]
 pids = product.split("/")
-pvid = pids[0]
-ppid = pids[1]
+pvid = pids[0].zfill(4)
+ppid = pids[1].zfill(4)
 
 
 f = open("/usr/share/hwdata/usb.ids", "r", encoding="utf8", errors='ignore');
