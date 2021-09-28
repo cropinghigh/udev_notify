@@ -11,7 +11,7 @@ source=("git+https://github.com/cropinghigh/udev_notify")
 md5sums=('SKIP')
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/udev_notify"
     mkdir -p $pkgdir/usr/bin/
     mkdir -p $pkgdir/etc/udev/rules.d/
     mkdir -p $pkgdir/usr/share/udev_notify/
